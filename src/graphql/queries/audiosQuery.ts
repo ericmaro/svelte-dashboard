@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { audioString } from "../strings/audioString";
 
 export const getAudioQuery = gql`query($paging: CursorPaging, $filter: AudioFilter, $sorting: [AudioSort!]) {
@@ -17,3 +17,11 @@ export const getAudioQuery = gql`query($paging: CursorPaging, $filter: AudioFilt
           }
     }
   }`;
+
+
+
+export const currentUserMonitoringQuery = gql`query($input: ReportInput!) {
+  currentUserMonitoring(input: $input) {
+    ${audioString}
+  }
+}`;

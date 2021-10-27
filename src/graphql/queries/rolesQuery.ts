@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { roleString } from "../strings/roleString";
 
 export const getRoleQuery = gql`query($paging: CursorPaging, $filter: RoleFilter, $sorting: [RoleSort!]) {

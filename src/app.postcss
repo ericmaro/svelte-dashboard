@@ -1,0 +1,55 @@
+@tailwind base;
+/* Write your global styles here, in PostCSS syntax */
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-text-base: #535862;
+        --color-text-muted: #808896;
+        --color-text-inverted: #F1F8FD;
+        --color-text-inverted-muted: #CDEAF9;
+
+        --color-primary: #2563EB;
+        --color-primary-muted: #285DFF;
+        --color-inverted:#ffffff;
+        --color-inverted-muted: #F3F4F6;
+
+        --color-border-base: #535862;
+        --color-border-muted: #808896;
+
+        --color-ring-base: #BFDBFE;
+    }
+    .theme-light {
+        --color-text-base: #535862;
+        --color-text-muted: #808896;
+        --color-text-inverted: #F1F8FD;
+        --color-text-inverted-muted: #CDEAF9;
+
+        --color-primary:#111827 ;
+        --color-primary-muted: #324773;
+        --color-inverted:#ffffff;
+        --color-inverted-muted: #F3F4F6;  
+        
+        --color-border-base: #324773;
+        --color-border-muted: #808896;
+
+        --color-ring-base: #ABE0D6;
+    }
+    .theme-dark {
+        --color-text-base: #FFFFFF;
+        --color-text-muted: #CDEAF9;
+        --color-text-inverted: #F1F8FD;
+        --color-text-inverted-muted: #CDEAF9;
+
+        --color-primary:#111827 ;
+        --color-primary-muted: #324773;
+        --color-inverted:#182B3C;
+        --color-inverted-muted:#122333;   
+        
+        --color-border-base: #055E4D;
+        --color-border-muted: #808896;
+
+        --color-ring-base: #055E4D;
+    }
+}

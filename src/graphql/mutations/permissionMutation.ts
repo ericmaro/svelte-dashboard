@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { permissionString } from "../strings/permissionString";
 
 export const createOnePermissionMutation = gql`mutation($input: CreateOnePermissionInput!) {

@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { userString } from "../strings/userString";
 
 export const createOneUserMutation = gql`mutation($input: CreateOneUserInput!) {

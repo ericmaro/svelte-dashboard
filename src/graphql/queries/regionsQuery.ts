@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { regionString } from "../strings/regionString";
 
 export const getRegionQuery = gql`query{

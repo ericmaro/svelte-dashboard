@@ -13,6 +13,6 @@ export interface FieldComparison {
   notILike?: string;
   in?: number[] | string[];
   notIn?: number[] | string[];
-  between?: { lower?: number; upper?: number };
+  between?: { lower?: number | string; upper?: number |string };
   notBetween?: { lower?: number; upper?: number };
 }

@@ -1,37 +1,51 @@
-import { apolloClient } from "@/graphql/api/client";
 import { loginMutation } from "@/graphql/mutations/loginMutation";
-import router from "@/router";
-import { LoginRequestType } from "@/views/pages/users/types/loginRequestType";
-import { LoginResponseType } from "@/views/pages/users/types/loginResponseType";
+import { goto } from '$app/navigation';
+import { graphQLClient } from "@/graphql/client";
+import type { LoginRequestType } from "@/stores/user/types/loginRequestType";
+import { LoginResponseType } from "@/stores/user/types/loginResponseType";
 
-export const loginService = async (data: LoginRequestType) => {
+export const loginService = async (data: LoginRequestType): Promise<void> => {
   try {
-    const results = await apolloClient.mutate({
-      mutation: loginMutation,
-      variables: data,
-    });
-    const res: LoginResponseType = results.data.login;
+    const results = await graphQLClient.request(
+      loginMutation,
+      data,
+    );
+    const res: LoginResponseType = results.login;
     localStorage.setItem(
       "login",
       LoginResponseType.LoginResponseTypeToJson(res)
     );
-    router.push({ path: "/" });
+    goto("/app")
   } catch (e) {
     if (e.graphQLErrors) throw e.graphQLErrors;
   }
 };
 
-export const loginCheckService = async () => {
-  const respString = await localStorage.getItem("login");
-  if (!respString) router.push({ path: "/login" });
-  const results = respString
-    ? LoginResponseType.toLoginResponseType(respString)
-    : null;
-  if (!results) router.push({ path: "/login" });
+export const loginCheckService = async (): Promise<void> => {
+  if (typeof window !== 'undefined') {
+    // do your stuff with sessionStorage
+    const respString = await localStorage.getItem("login");
+
+    if (!respString) {
+      goto("/auth/login");
+      return
+    }
+    const results = respString
+      ? LoginResponseType.toLoginResponseType(respString)
+      : null;
+    if (!results) {
+      goto("/auth/login");
+      return
+    };
+
+    goto("/app");
+    return
+  }
+
 };
-export const logoutService = async () => {
+export const logoutService = async (): Promise<void> => {
   await localStorage.removeItem("login");
-  router.push({ path: "/login" });
+  goto("/auth/login");
 };
 
 export const getLoginDataService = async (): Promise<LoginResponseType | null> => {
@@ -40,6 +54,7 @@ export const getLoginDataService = async (): Promise<LoginResponseType | null> =
   const results = respString
     ? LoginResponseType.toLoginResponseType(respString)
     : null;
+    console.log(results)
   if (!results) return null;
   return results;
 };

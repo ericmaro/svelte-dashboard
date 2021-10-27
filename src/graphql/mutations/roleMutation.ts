@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { roleString } from "../strings/roleString";
 
 export const createOneRoleMutation = gql`mutation($input: CreateOneRoleInput!) {
@@ -21,6 +21,12 @@ export const addPermissionsToRoleMutation = gql`mutation($input: RelationsInput!
 
 export const removePermissionsToRoleMutation = gql`mutation($input: RelationsInput!) {
   removePermissionsFromRole(input: $input) {
+      ${roleString}
+  }
+}`;
+
+export const deleteOneRoleMutation = gql`mutation($input: DeleteOneInput!) {
+  deleteOneRole(input: $input) {
       ${roleString}
   }
 }`;

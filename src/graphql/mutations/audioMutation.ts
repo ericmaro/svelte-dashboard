@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { audioString } from "../strings/audioString";
 
 export const createOneAudioMutation = gql`mutation($input: CreateOneAudioInput!) {

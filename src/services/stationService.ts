@@ -1,25 +1,25 @@
-import { apolloClient } from "@/graphql/api/client";
 import { getStationQuery } from "@/graphql/queries/stationsQuery";
-import { CursorPaging } from "@/shared/types/paging";
-import { Sort } from "@/shared/types/sort";
-import { StationFilter } from "@/views/pages/stations/types/stationFilter";
-import { StationConnection } from "@/views/pages/stations/types/stationConnection";
-import { CreateOneStationInput } from "@/views/pages/stations/types/createOneStationInput";
-import { Station } from "@/views/pages/stations/types/station";
+import type { CursorPaging } from "@/shared/types/paging";
+import type { Sort } from "@/shared/types/sort";
 import {
   createOneStationMutation,
   updateOneStationMutation,
 } from "@/graphql/mutations/stationMutation";
-import { UpdateOneStationInput } from "@/views/pages/stations/types/updateOneStationInput";
+import { graphQLClient } from "@/graphql/client";
+import type { CreateOneStationInput } from "@/stores/station/types/createOneStationInput";
+import type { Station } from "@/stores/station/types/station";
+import type { UpdateOneStationInput } from "@/stores/station/types/updateOneStationInput";
+import type { StationFilter } from "@/stores/station/types/stationFilter";
+import type { StationConnection } from "@/stores/station/types/stationConnection";
 
-export const createOneStationService = async (data: CreateOneStationInput) => {
+
+export const createOneStationService = async (data: CreateOneStationInput):Promise<Station> => {
   try {
-    const results = await apolloClient.mutate({
-      mutation: createOneStationMutation,
-      variables: {
+    const results = await graphQLClient.request(createOneStationMutation,
+       {
         input: data,
       },
-    });
+    );
     const res: Station = results.data.createOneStation;
     return res;
   } catch (e) {
@@ -27,14 +27,13 @@ export const createOneStationService = async (data: CreateOneStationInput) => {
   }
 };
 
-export const updateOneStationService = async (data: UpdateOneStationInput) => {
+export const updateOneStationService = async (data: UpdateOneStationInput):Promise<Station> => {
   try {
-    const results = await apolloClient.mutate({
-      mutation: updateOneStationMutation,
-      variables: {
+    const results = await graphQLClient.request(updateOneStationMutation,
+       {
         input: data,
       },
-    });
+    );
     const res: Station = results.data.updateOneStation;
     return res;
   } catch (e) {
@@ -46,16 +45,15 @@ export const getStationsService = async (params?: {
   paging?: CursorPaging;
   filter?: StationFilter;
   sorting?: Sort[];
-}) => {
+}):Promise<StationConnection> => {
   try {
-    const results = await apolloClient.query({
-      query: getStationQuery,
-      variables: {
+    const results = await graphQLClient.request(getStationQuery,
+     {
         paging: params && params.paging ? params.paging : undefined,
         filter: params && params.filter ? params.filter : undefined,
         sorting: params && params.sorting ? params.sorting : undefined,
       },
-    });
+    );
     console.log(results);
     const res: StationConnection = results.data.stations;
     console.log(res);

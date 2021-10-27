@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from 'graphql-request';
 import { stationString } from "../strings/stationString";
 
 export const createOneStationMutation = gql`mutation($input: CreateOneStationInput!) {
