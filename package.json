@@ -1,6 +1,7 @@
 {
-  "name": "ubiasoko",
+  "name": "svelte-dash",
   "version": "0.1.0",
+  "author": "Eric Maro",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
