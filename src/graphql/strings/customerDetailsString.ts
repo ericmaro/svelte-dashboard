@@ -1,0 +1,21 @@
+export const customerDetailsString = `
+id
+sex
+maritalStatus
+latitude
+longitude
+ward
+village
+region
+district
+country
+occupation
+typeOfId
+idNumber
+spouseName
+numberOfChildren
+numberOfDependents
+nextOfKin
+headOfHousehold
+extendedFamily              
+`;

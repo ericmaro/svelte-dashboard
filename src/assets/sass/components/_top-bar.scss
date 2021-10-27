@@ -1,0 +1,6 @@
+@layer components {
+    .top-bar {
+        height: 67px;
+        @apply flex items-center relative border-b border-theme-5;
+    }
+}
